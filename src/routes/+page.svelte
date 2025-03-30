@@ -2,7 +2,7 @@
   import Header from "./Header.svelte";
   let name = $state("Scott");
   let status: "OPEN" | "CLOSED" = $state("OPEN");
-
+  let full_name = $derived(`${name} Tolinski`);
   /*
   function toggle() {
     status = status === "OPEN" ? "CLOSED" : "OPEN";
@@ -13,7 +13,9 @@
   }
 </script>
 
-<Header {name} />
+<Header {name} fake_name="Wess" />
+
+<h2>{full_name}</h2>
 
 <input type="text" bind:value={name} />
 

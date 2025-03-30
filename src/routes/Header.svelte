@@ -1,9 +1,17 @@
 <script lang="ts">
-  let { name }: { name: string } = $props();
+  let {
+    name,
+    fake_name = null,
+  }: {
+    name: string;
+    fake_name?: string | null;
+  } = $props();
 </script>
 
 <h1>Hello {name}</h1>
 <h2>{name.replaceAll("t", "X")}</h2>
+
+{fake_name}
 
 <style>
 </style>
