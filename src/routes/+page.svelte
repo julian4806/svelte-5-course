@@ -10,7 +10,9 @@
 </script>
 
 <main>
-  <Header name={formState.name} />
+  <Header name={formState.name}>
+    <p>Hello</p>
+  </Header>
 
   <p>Step: {formState.step + 1}</p>
 
