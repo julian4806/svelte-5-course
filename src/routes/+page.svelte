@@ -12,6 +12,9 @@
 <main>
   <Header name={formState.name}>
     <p>Hello</p>
+    {#snippet secondChild(name)}
+      <p>Second Child {name}</p>
+    {/snippet}
   </Header>
 
   <p>Step: {formState.step + 1}</p>
