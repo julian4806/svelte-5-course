@@ -10,13 +10,9 @@
 </script>
 
 <main>
-  <p>Step: {formState.step + 1}</p>
+  <Header name={formState.name} />
 
-  {#if formState.error}
-    <p class="error">
-      {formState.error}
-    </p>
-  {/if}
+  <p>Step: {formState.step + 1}</p>
 
   {#if formState.step === 0}
     <div>
@@ -49,6 +45,12 @@
         }
       }}>Next</button
     >
+  {/if}
+
+  {#if formState.error}
+    <p class="error">
+      {formState.error}
+    </p>
   {/if}
 </main>
 

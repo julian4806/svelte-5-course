@@ -1,17 +1,18 @@
 <script lang="ts">
   let {
     name,
-    fake_name = null,
   }: {
     name: string;
-    fake_name?: string | null;
   } = $props();
 </script>
 
-<h1>Hello {name}</h1>
-<h2>{name.replaceAll("t", "X")}</h2>
-
-{fake_name}
+<div class="header">
+  <h1>{name ? name + "'s" : "..."} Form</h1>
+</div>
 
 <style>
+  .header {
+    font-family: sans-serif;
+    font-style: italic;
+  }
 </style>
