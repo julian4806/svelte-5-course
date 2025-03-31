@@ -2,28 +2,57 @@
   import Header from "./Header.svelte";
 
   let formState = $state({
-    name: "",
-    birthday: "",
+    answers: {},
     step: 0,
     error: "",
   });
+
+  const questions = [
+    {
+      question: "What is your name?",
+      id: "name",
+      type: "text",
+    },
+    {
+      question: "What is your birthday?",
+      id: "birthday",
+      type: "date",
+    },
+    {
+      question: "What is your favorite color?",
+      id: "color",
+      type: "color",
+    },
+  ];
+
+  function nextStep(id: string) {
+    if (formState.answers[id]) {
+      formState.step++;
+      formState.error = "";
+    } else {
+      formState.error = `Please fill out the form input`;
+    }
+  }
 </script>
 
 <main>
-  <Header name={formState.name}>
-    <p>Hello</p>
-    {#snippet secondChild(name)}
-      <p>Second Child {name}</p>
-    {/snippet}
-  </Header>
+  <Header name={formState.answers.name} />
 
-  <p>Step: {formState.step + 1}</p>
+  {#if formState.step >= questions.length}
+    <p>Form submitted, thank you!</p>
+  {:else}
+    <p>Step: {formState.step + 1}</p>
+  {/if}
 
-  {@render formStep({
-    question: "What's your name",
-    id: "name",
-    type: "text",
-  })}
+  <!-- {#each questions as question (question.id)} -->
+  {#each questions as question, index (question.id)}
+    {#if formState.step === index}
+      {@render formStep(question)}
+    {/if}
+  {/each}
+  <!-- {#each questions as { id, question, type } (id)}
+    {@render formStep({ question, id, type })}
+  {/each} -->
 
   {#if formState.error}
     <p class="error">
@@ -31,6 +60,10 @@
     </p>
   {/if}
 </main>
+
+<br /><br />
+<hr />
+<small>{JSON.stringify(formState)}</small>
 
 {#snippet formStep({
   question,
@@ -44,8 +77,9 @@
   <article>
     <div>
       <label for={id}>{question}</label>
-      <input {type} {id} bind:value={formState[id]} />
+      <input {type} {id} bind:value={formState.answers[id]} />
     </div>
+    <button onclick={() => nextStep(id)}> Next </button>
   </article>
 {/snippet}
 
