@@ -1,8 +1,17 @@
+export class ScottState {
+    value = $state(0)
+
+    up() {
+        this.value++
+    }
+
+}
+
 export function createState() {
     let value = $state(0)
 
     function up() {
-        value += 1
+        value++
     }
 
     return {
