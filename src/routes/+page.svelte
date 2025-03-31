@@ -7,6 +7,8 @@
     error: "",
   });
 
+  $inspect(formState.step);
+
   const questions = [
     {
       question: "What is your name?",
@@ -33,6 +35,29 @@
       formState.error = `Please fill out the form input`;
     }
   }
+
+  // onMount
+  $effect(() => {
+    console.log("on mounting");
+
+    return () => {
+      // when unmounted / destroyed
+      // before effect reryns
+      console.log("on unmounted");
+    };
+  });
+
+  $effect(() => {
+    // This will re-run, when formState.step has changed
+    console.log("formState", formState.step);
+
+    // don't create state beased of other state, in effect
+    // use $derived()
+    return () => {
+      // brefore effect re-runs
+      console.log("before formState reruns", formState.step);
+    };
+  });
 </script>
 
 <main>
